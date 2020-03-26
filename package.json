@@ -1,0 +1,47 @@
+{
+  "name": "hairy-up",
+  "version": "0.0.1",
+  "private": true,
+  "engines": {
+    "node": "12.16.1",
+    "npm": "6.13.4",
+    "yarn": "1.15.2"
+  },
+  "devDependencies": {
+    "react-scripts": "^3.0.0"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.6.1",
+    "@material-ui/icons": "^4.5.1",
+    "@material-ui/styles": "^4.6.0",
+    "@toast-ui/react-calendar": "^1.0.5",
+    "faker": "^4.1.0",
+    "interactjs": "^1.9.7",
+    "json-server": "^0.15.1",
+    "moment": "^2.24.0",
+    "node-sass": "^4.13.0",
+    "prop-types": "^15.7.2",
+    "randomcolor": "^0.5.4",
+    "react": "^16.8.6",
+    "react-big-calendar": "^0.24.1",
+    "react-calendar-timeline": "^0.26.7",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.2",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "tui-calendar": "^1.12.12"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject",
+    "test": "react-scripts test --env=node",
+    "api": "node ./dev-api/server.js"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
