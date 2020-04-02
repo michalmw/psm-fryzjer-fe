@@ -1,0 +1,18 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.disabled-link {
+  pointer-events: none;
+}
+
+.app {
+  padding: 1rem;
+}

@@ -1,70 +1,29 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import labels from './labels';
-import {Paper, Tabs, Tab, Typography, Box} from '@material-ui/core';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import Dnd from './containers/calendar/dnd'
-import Tui from './containers/calendar/tui'
-import Time from './containers/calendar/timeline'
-import './assets/styles.scss';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import Header from './components/layout/Header';
+import Navbar from './components/layout/Navbar';
 
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+import Calendar from './containers/Calendar';
+import Dashboard from './containers/Dashboard';
+import Report from './containers/Reports';
+import Warehouse from './containers/Warehouse';
 
-    return (
-        <Typography
-            component="div"
-            role="tabpanel"
-            hidden={value !== index}
-            id={`scrollable-auto-tabpanel-${index}`}
-            aria-labelledby={`scrollable-auto-tab-${index}`}
-            {...other}
-        >
-            {value === index && <Box p={3}>{children}</Box>}
-        </Typography>
-    );
-}
+import './assets/styles/styles.scss';
 
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
-};
-
-const App  = () => {
-    const [value, setValue] = React.useState(0);
-
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
-    return (
-        <Paper className="app">
-            <h1>{labels.appTitle}</h1>
-            <Tabs
-                value={value}
-                onChange={handleChange}
-                indicatorColor="primary"
-                textColor="primary"
-                centered
-            >
-                <Tab label="Big Calendar">
-                </Tab>
-                <Tab label="Toast Calendar" />
-                <Tab label="Timeline" />
-            </Tabs>
-            <TabPanel value={value} index={0}>
-                <Dnd />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <Tui />
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-                <Time />
-            </TabPanel>
-        </Paper>
-    );
-};
+const App  = () => (
+    <div className="app">
+        <Router >
+            <Header />
+            <Navbar />
+            <Switch>
+                <Route path="/calendar"><Calendar /></Route>
+                <Route path="/report"><Report /></Route>
+                <Route path="/warehouse"><Warehouse /></Route>
+                <Route path="/"><Dashboard /></Route>
+            </Switch>
+        </Router>
+    </div>
+);
 
 export default App;

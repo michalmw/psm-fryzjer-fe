@@ -1,10 +1,11 @@
 import React from 'react'
+import moment from "moment";
 import events from './events'
 import {Calendar, Views, momentLocalizer} from 'react-big-calendar'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.scss'
-import moment from "moment";
+import 'react-big-calendar/lib/css/react-big-calendar.css'
 
 const DragAndDropCalendar = withDragAndDrop(Calendar);
 
@@ -45,7 +46,7 @@ class Dnd extends React.Component {
         const { events } = this.state;
 
         const nextEvents = events.map(existingEvent => {
-            return existingEvent.id == event.id
+            return existingEvent.id === event.id
                 ? { ...existingEvent, start, end }
                 : existingEvent
         });
@@ -62,7 +63,7 @@ class Dnd extends React.Component {
         let hour = {
           id: newId,
           title: 'New Event',
-          allDay: event.slots.length == 1,
+          allDay: event.slots.length === 1,
           start: event.start,
           end: event.end,
         };

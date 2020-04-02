@@ -226,7 +226,7 @@ const Tui = () => {
     }
 
     function _getTimeTemplate(schedule, isAllDay) {
-        var html = [];
+        const html = [];
 
         if (!isAllDay) {
             html.push("<strong>" + _getFormattedTime(schedule.start) + "</strong> ");
@@ -240,7 +240,7 @@ const Tui = () => {
             } else if (schedule.recurrenceRule) {
                 html.push('<span class="calendar-font-icon ic-repeat-b"></span>');
             } else if (schedule.attendees.length) {
-                html.push('<span class="calendar-font-icon ic-user-b"></span>');
+                html.push('<span class="calendar-font-icon ic-Employee-b"></span>');
             } else if (schedule.location) {
                 html.push('<span class="calendar-font-icon ic-location-b"></span>');
             }
