@@ -1,61 +1,122 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from 'react'
+import moment from "moment";
+import events from './events'
+import {Calendar, Views, momentLocalizer} from 'react-big-calendar'
+import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
+import {Avatar} from '@material-ui/core'
+import Toolbar from './toolbar';
 
-import { Tabs, Tab, Typography, Box } from '@material-ui/core';
-
-import BigCalendar from '../../components/calendar/dnd';
-import TuiCalendar from '../../components/calendar/tui';
-
-function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-        <Typography
-            component="div"
-            role="tabpanel"
-            hidden={value !== index}
-            id={`full-width-tabpanel-${index}`}
-            aria-labelledby={`full-width-tab-${index}`}
-            {...other}
-        >
-            {value === index && <Box p={3}>{children}</Box>}
-        </Typography>
-    );
-}
-
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
-};
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+import '../../containers/Calendar/Calendar.scss';
+import { makeStyles } from '@material-ui/core/styles';
+import CalendarToolbar from "./components/CalendarToolbar";
 
 
-export default function FullWidthTabs() {
-    const [value, setValue] = React.useState(0);
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
+const DragAndDropCalendar = withDragAndDrop(Calendar);
+
+class Dnd extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            events: events,
+            date: new Date()
+        };
+    }
+    getResourceMap = () => {
+        return [
+            { resourceId: 1, resourceTitle: 'Sabina', },
+            { resourceId: 2, resourceTitle: 'Michał' },
+            { resourceId: 3, resourceTitle: 'Paulina' }
+        ];
+    }
+
+    moveEvent = ({ event, start, end, isAllDay: droppedOnAllDaySlot }) => {
+        const { events } = this.state;
+
+        const idx = events.indexOf(event);
+        let allDay = event.allDay;
+
+        if (!event.allDay && droppedOnAllDaySlot) {
+            allDay = true
+        } else if (event.allDay && !droppedOnAllDaySlot) {
+            allDay = false
+        }
+
+        const updatedEvent = { ...event, start, end, allDay };
+
+        const nextEvents = [...events];
+        nextEvents.splice(idx, 1, updatedEvent);
+
+        this.setState({
+            events: nextEvents,
+        });
+    }
+
+    resizeEvent = ({ event, start, end }) => {
+        const { events } = this.state;
+
+        const nextEvents = events.map(existingEvent => {
+            return existingEvent.id === event.id
+                ? { ...existingEvent, start, end }
+                : existingEvent
+        });
+
+        this.setState({
+            events: nextEvents,
+        })
+
     };
 
-    return (
-        <div>
-            <Tabs
-                value={value}
-                onChange={handleChange}
-                indicatorColor="primary"
-                textColor="primary"
-                variant="fullWidth"
-                aria-label="full width tabs example"
-            >
-                <Tab label="Big Calendar" />
-                <Tab label="TUI Calendar" />
-            </Tabs>
-            <TabPanel value={value} index={0}>
-                <BigCalendar />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-                <TuiCalendar />
-            </TabPanel>
-        </div>
-    );
+    newEvent = (event) => {
+        let idList = this.state.events.map(a => a.id)
+        let newId = Math.max(...idList) + 1
+        let hour = {
+            id: newId,
+            title: 'Koloryzacja z Magdą',
+            allDay: event.slots.length === 1,
+            start: event.start,
+            end: event.end,
+            resourceId: event.resourceId
+        };
+        this.setState({
+            events: this.state.events.concat([hour]),
+        })
+    }
+
+    handleChangeDate = (date) => {
+        this.setState({date})
+    }
+
+    render() {
+        const localizer = momentLocalizer(moment);
+        const {date, events} = this.state;
+        return (
+            <DragAndDropCalendar
+                selectable
+                localizer={localizer}
+                events={events}
+                onEventDrop={this.moveEvent}
+                resizable
+                components={{
+                    toolbar: ()=><Toolbar handleChangeDate={this.handleChangeDate}/>,
+                    resourceHeader: ({resource}) => <CalendarToolbar employee={resource} />,
+                    timeGutterHeader:  () => null
+                }}
+                style={{minHeight: '100vh'}}
+                onEventResize={this.resizeEvent}
+                onSelectSlot={this.newEvent}
+                onDragStart={() => null}
+                defaultView={Views.DAY}
+                defaultDate={new Date()}
+                min={new Date('2020-04-18T08:00:00')}
+                max={new Date('2020-04-18T20:00:00')}
+                resources={this.getResourceMap()}
+                resourceIdAccessor="resourceId"
+                resourceTitleAccessor="resourceTitle"
+            />
+        )
+    }
 }
+
+export default Dnd

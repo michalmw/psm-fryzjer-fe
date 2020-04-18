@@ -1,27 +1,24 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
-import Header from './components/layout/Header';
 import Navbar from './components/layout/Navbar';
-
 import Calendar from './containers/Calendar';
-import Dashboard from './containers/Dashboard';
 import Report from './containers/Reports';
 import Warehouse from './containers/Warehouse';
-
-import './assets/styles/styles.scss';
+import './App.scss';
 
 const App  = () => (
-    <div className="app">
-        <Router >
-            <Header />
-            <Navbar />
+    <div className="page-container">
+        <Router>
             <Switch>
-                <Route path="/calendar"><Calendar /></Route>
-                <Route path="/report"><Report /></Route>
-                <Route path="/warehouse"><Warehouse /></Route>
-                <Route path="/"><Dashboard /></Route>
+                <div className="wrapper">
+                    <Route path="/calendar"><Calendar /></Route>
+                    <Route path="/report"><Report /></Route>
+                    <Route path="/warehouse"><Warehouse /></Route>
+                    <Route path="/"><Redirect to="/calendar" /></Route>
+                </div>
             </Switch>
+            <Navbar/>
         </Router>
     </div>
 );

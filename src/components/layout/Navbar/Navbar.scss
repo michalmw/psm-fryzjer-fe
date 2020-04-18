@@ -1,0 +1,24 @@
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 100;
+
+  .MuiBottomNavigationAction-root {
+    min-width: 60px;
+    padding: 12px 0;
+    margin: 4px 5px;
+  }
+  .Mui-selected {
+    border-bottom: solid 2px #ececec;
+    padding: 0;
+  }
+}
+
+@media (min-width: 800px) {
+  .bottom-nav {
+    max-width: 375px;
+    margin: auto;
+    bottom: 5rem;
+  }
+}

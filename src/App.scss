@@ -1,0 +1,12 @@
+.wrapper {
+  margin-bottom: 4rem;
+ }
+
+@media (min-width: 800px) {
+  .page-container {
+    max-width: 375px;
+    max-height: 80vh;
+    margin: 5rem auto;
+    overflow: scroll;
+  }
+}
