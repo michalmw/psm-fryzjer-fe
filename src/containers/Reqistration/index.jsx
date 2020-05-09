@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import {Button, Drawer, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
 import LoginForm from "./components/LoginForm";
 import RegistrationForm from "./components/RegistrationForm";
@@ -12,7 +13,7 @@ const Registration  = () => {
     const [openRegistration, setRegistrationOpen] = React.useState(false);
     return (
         <div className='registration'>
-            <h1>{labels.joinTitle}<strong>{labels.appTitle}</strong></h1>
+            <Link to="/calendar"><h1>{labels.joinTitle}<strong>{labels.appTitle}</strong></h1></Link>
             <p>{labels.startTitle}</p>
             <p>{labels.startCopy}</p>
             <List>
@@ -56,4 +57,3 @@ const Registration  = () => {
 }
 
 export default Registration;
-
