@@ -6,11 +6,81 @@
   }
 }
 
+.drawer {
+  height: 100vh;
+}
+
+.service-container {
+  width: 100%;
+  margin: 1rem;
+  .MuiPaper-root {
+    padding: 1rem;
+    background-color: $background-grey;
+  }
+}
+
+.drawer-content {
+  padding: 2rem;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  .MuiTextField-root {
+    margin: 1rem;
+  }
+  .add-button {
+    position: fixed;
+    bottom: 1rem;
+    margin: auto;
+    width: 90vw;
+  }
+}
+
+.client-container {
+  margin-top: 1rem;
+  display: flex;
+  div {
+    margin: 1rem 6rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .MuiIconButton-root {
+    padding: 1rem;
+    border: dashed 1px $font-grey;
+    border-radius: 50%;
+    margin: 0.5rem 0;
+  }
+}
+
+.search-icon {
+  margin-right: 1rem;
+  color: $font-grey-light;
+}
+
+.drawer-middle {
+  min-height: 50vh;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+.time-pickers {
+  display: flex;
+  justify-content: space-around;
+}
+
+.MuiAvatar-colorDefault {
+  background-color: $primary!important;
+}
+
 .rbc-time-view, .rbc-timeslot-group {
-  border: solid 1px $background-grey;
+  border: solid 1px $background-grey!important;
 }
 .rbc-time-content > * + * > * {
-  border-left: solid 1px $background-grey;
+  border-left: solid 1px $background-grey!important;
 }
 .rbc-time-view-resources .rbc-time-gutter {
   background-color: $background-grey-light;
@@ -26,8 +96,15 @@
   width: auto;
 }
 
+.rbc-time-view-resources .rbc-time-gutter {
+  border-right: 0 !important;
+}
+
 .rbc-current-time-indicator {
-  background-color: $primary;
+  background-color: $primary !important;
+  height: 2px !important;
+  left: -5rem !important;
+  z-index: 9999!important;
 }
 
 .rbc-header {
@@ -80,6 +157,10 @@
   }
 }
 
+.rbc-time-slot.rbc-label {
+  margin-top: 2rem!important;
+}
+
 .calendar-toolbar {
   display: flex;
   padding: 0.2rem 1rem;
@@ -90,4 +171,12 @@
 }
 .rbc-today {
   background-color: $background-grey-light!important;
+}
+
+.rbc-time-slot {
+  min-height: 3rem;
+}
+.rbc-time-view, .rbc-timeslot-group {
+  border: 0;
+  background-color: $background-grey-light;
 }

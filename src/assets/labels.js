@@ -1,7 +1,35 @@
 module.exports = {
-    appTitle: 'Hairy up!',
+    appTitle: 'HairApp',
     calendarTitle: 'Calendar',
     dashboardTitle: 'Dashboard',
     reportTitle: 'Report',
     warehouseTitle: 'Warehouse',
+    selectDate: 'Wybierz dzień',
+    selectStart: 'Od',
+    selectEnd: 'Do',
+    search: 'Szukaj fryzjera',
+
+    phoneNumber: 'Numer telefonu',
+    phoneNumberCopy: 'Zacznij od podania swojego numeru telefonu, wyślemy na niego kod SMS, który pozwoli utworzyć konto.',
+    phoneRequiredError: 'Podaj numer telefonu',
+    phoneUniqueError: 'Posiadasz już konto, teraz możesz się zalogować.',
+    phoneFormatError: 'Zły format',
+    getActivateCodeButton: 'wyślij kod aktywacyjny',
+    provideCodeLabel: 'Wpisz kod, który dostałeś/aś w SMS',
+    haveNotGetCodeLabel: 'Nie otrzymałeś kodu?',
+    sentCodeAgainLabel: 'Wyślij ponownie kod SMS.',
+    codeButtonLabel: 'potwierdź kod SMS',
+    codeValidError: 'Niewłaściwy kod, spróbuj jeszcze raz.',
+
+    startTitle: 'Cześć',
+    startCopy: 'chcemy aby ta aplikacja pomogła Ci ogarnąć część pracy w salonie. Jeśli też tego chcesz to potrzebujesz  stworzyć dwie rzeczy: ',
+    yourAccount: 'swoje konto',
+    yourCompanyAccount: 'konto dla Twojego salonu',
+    accountCreationTime: 'Całość powinna zająć ok 3 min. :-) ',
+
+    createAccountButtonLabel: 'chcę utworzyć konto',
+    iGotSmsLabel: 'mam już kod SMS',
+    loginCopy: 'Jeśli już masz konto:',
+    loginButtonLabel: 'zaloguj się',
+    joinTitle: 'Dołącz do '
 };

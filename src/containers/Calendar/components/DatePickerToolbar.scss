@@ -1,0 +1,97 @@
+@import '../../../assets/styles/styles';
+
+.day-circle-today-text {
+  display: none;
+}
+
+.weekly-container {
+  background-color: white;
+  display: flex;
+  padding: 1rem 2rem 0.5rem;
+}
+
+.day-box {
+  margin: 0 auto;
+}
+
+.day-circle-container {
+  background-color: inherit;
+  border: 0;
+  padding: 0.2rem;
+}
+.MuiPickersDay-daySelected {
+  background-color: $primary!important;
+}
+.day-cicle, .day-cicle-selected {
+  padding: 0;
+  strong {
+    color: $font-grey-light;
+    font-weight: normal;
+  }
+  div {
+    margin: 0.7rem 0;
+    width: 2.2rem;
+    height: 2.2rem;
+    line-height: 2.2rem;
+  }
+}
+.MuiExpansionPanelSummary-root {
+  min-height: 0!important;
+  height: 0;
+  border: 0!important;
+}
+.MuiExpansionPanelDetails-root {
+  padding: 0!important;
+  border: 0!important;
+}
+.MuiExpansionPanel-root.Mui-expanded {
+  margin: 0!important;
+  border: 0!important;
+}
+.MuiPaper-elevation1 {
+  border: 0!important;
+  box-shadow: none!important;
+}
+.day-cicle-selected {
+  div {
+    color: white;
+    background-color: $primary;
+    border-radius: 50%;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.icon-container {
+  display: flex;
+}
+
+.middle-icon {
+  margin: auto;
+}
+
+.prev-week-arrow, .next-week-arrow {
+  width: 0;
+  height: 0;
+  border: solid $font-grey-light;
+  position: absolute;
+  margin-top: 0.4rem;
+  cursor: pointer;
+  border-width: 0 2.5px 2.5px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.next-week-arrow {
+  transform: rotate(-45deg);
+  -webkit-transform: rotate(-45deg);
+  right: 3rem;
+}
+
+.prev-week-arrow {
+  transform: rotate(135deg);
+  -webkit-transform: rotate(135deg);
+  left: 3rem;
+}

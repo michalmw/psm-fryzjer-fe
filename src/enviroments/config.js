@@ -1,1 +1,2 @@
-export const api = 'http://localhost:3000';
+export const api = 'http://fryzjer-nest.herokuapp.com/graphql';
+export const localApi = 'http://localhost:3000';

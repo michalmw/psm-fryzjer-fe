@@ -1,0 +1,19 @@
+@import "../../assets/styles/styles";
+
+.MuiDrawer-paper{
+  width: 100%;
+}
+.MuiListItem-root {
+  padding: 0;
+}
+.registration {
+  .MuiListItemIcon-root {
+    min-width: 0;
+    margin-right: 12px;
+  }
+}
+
+.svg-inline--fa {
+  color: $primary;
+  height: 0.4rem;
+}

@@ -1,16 +1,17 @@
 import React from 'react'
 import moment from "moment";
 import events from './events'
-import {Calendar, Views, momentLocalizer} from 'react-big-calendar'
+import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
-import {Avatar} from '@material-ui/core'
-import Toolbar from './toolbar';
+import { Drawer, IconButton, Button, Paper } from '@material-ui/core'
+import Toolbar from './components/DatePickerToolbar';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import '../../containers/Calendar/Calendar.scss';
-import { makeStyles } from '@material-ui/core/styles';
 import CalendarToolbar from "./components/CalendarToolbar";
-
+import AddVisit from "./components/AddVisit";
+import {BrowserRouter as Router, Switch} from "react-router-dom";
+import Navbar from "../../components/layout/Navbar";
 
 
 const DragAndDropCalendar = withDragAndDrop(Calendar);
@@ -20,13 +21,15 @@ class Dnd extends React.Component {
         super(props);
         this.state = {
             events: events,
-            date: new Date()
+            date: new Date(),
+            open: false,
+            slotInfo: undefined
         };
     }
     getResourceMap = () => {
         return [
             { resourceId: 1, resourceTitle: 'Sabina', },
-            { resourceId: 2, resourceTitle: 'Michał' },
+            { resourceId: 2, resourceTitle: 'Michał', },
             { resourceId: 3, resourceTitle: 'Paulina' }
         ];
     }
@@ -68,13 +71,12 @@ class Dnd extends React.Component {
 
     };
 
-    newEvent = (event) => {
+    newEvent = (event = this.state.slotInfo) => {
         let idList = this.state.events.map(a => a.id)
         let newId = Math.max(...idList) + 1
         let hour = {
             id: newId,
             title: 'Koloryzacja z Magdą',
-            allDay: event.slots.length === 1,
             start: event.start,
             end: event.end,
             resourceId: event.resourceId
@@ -82,39 +84,53 @@ class Dnd extends React.Component {
         this.setState({
             events: this.state.events.concat([hour]),
         })
+        this.toggleDrawer(false);
     }
 
     handleChangeDate = (date) => {
         this.setState({date})
     }
 
+    toggleDrawer = (open = true, slotInfo) => {
+        console.log(slotInfo)
+        this.setState({open});
+        if (slotInfo) {
+            this.setState({slotInfo});
+        }
+    };
+
     render() {
         const localizer = momentLocalizer(moment);
-        const {date, events} = this.state;
+        const {date, events, open} = this.state;
         return (
-            <DragAndDropCalendar
-                selectable
-                localizer={localizer}
-                events={events}
-                onEventDrop={this.moveEvent}
-                resizable
-                components={{
-                    toolbar: ()=><Toolbar handleChangeDate={this.handleChangeDate}/>,
-                    resourceHeader: ({resource}) => <CalendarToolbar employee={resource} />,
-                    timeGutterHeader:  () => null
-                }}
-                style={{minHeight: '100vh'}}
-                onEventResize={this.resizeEvent}
-                onSelectSlot={this.newEvent}
-                onDragStart={() => null}
-                defaultView={Views.DAY}
-                defaultDate={new Date()}
-                min={new Date('2020-04-18T08:00:00')}
-                max={new Date('2020-04-18T20:00:00')}
-                resources={this.getResourceMap()}
-                resourceIdAccessor="resourceId"
-                resourceTitleAccessor="resourceTitle"
-            />
+            <div>
+                <Drawer anchor="bottom" open={open}>
+                    <AddVisit toggleDrawer={this.toggleDrawer} newEvent={this.newEvent} />
+                </Drawer>
+                <DragAndDropCalendar
+                    selectable
+                    localizer={localizer}
+                    events={events}
+                    onEventDrop={this.moveEvent}
+                    resizable
+                    step={30}
+                    components={{
+                        toolbar: ()=><Toolbar handleChangeDate={this.handleChangeDate}/>,
+                        resourceHeader: ({resource}) => <CalendarToolbar employee={resource} />,
+                        timeGutterHeader:  () => null
+                    }}
+                    style={{minHeight: '100vh'}}
+                    onEventResize={this.resizeEvent}
+                    onSelectSlot={(slotInfo) => this.toggleDrawer(true, slotInfo)}
+                    onDragStart={() => null}
+                    defaultView={Views.DAY}
+                    defaultDate={new Date()}
+                    resources={this.getResourceMap()}
+                    resourceIdAccessor="resourceId"
+                    resourceTitleAccessor="resourceTitle"
+                />
+                <Navbar/>
+            </div>
         )
     }
 }
