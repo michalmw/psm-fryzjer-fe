@@ -1,18 +1,53 @@
-version: 2.1
-orbs:
-  node: circleci/node@2.0.2
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
 jobs:
-  build-and-test:
+  build:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:12.16.2
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+
     steps:
       - checkout
-      - node/with-cache:
-          steps:
-            - run: yarn install 
-            - run: npm build
-            - run: node .circleci/deploy.js
+
+      # - restore_cache:
+      #     name: Restore Yarn Package Cache
+      #     keys:
+      #       - yarn-packages-{{ checksum "yarn.lock" }}
+
+      - run:
+          name: Install Dependencies
+          command: yarn install 
+
+      # run build!
+      - run: yarn build
+
+      # - run: scp -r dist/* bpc_core@mercury.suprice.today:/public_html/
+      - run: node .circleci/deploy.js
+
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+
+      # - save_cache:
+      #     paths:
+      #       - node_modules
+      #     key: v1-dependencies-{{ checksum "package.json" }}
+
 workflows:
-    build-and-test:
-      jobs:
-        - build-and-test
-        - node/test:
-            version: 12.16.0
+  version: 2
+  deploy:
+    jobs:
+      - build
+        
