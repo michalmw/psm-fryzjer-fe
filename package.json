@@ -28,6 +28,7 @@
     "formik": "^2.1.4",
     "formik-material-ui": "^2.0.0-beta.1",
     "formik-material-ui-pickers": "^0.0.8",
+    "ftp-deploy": "^2.3.7",
     "graphql": "^15.0.0",
     "json-server": "^0.15.1",
     "material-ui-pickers": "^2.2.4",
