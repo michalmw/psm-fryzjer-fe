@@ -1,5 +1,5 @@
 import React from 'react'
-import { Drawer, IconButton, Button, Paper, TextField } from '@material-ui/core'
+import { Drawer, IconButton, Button, Paper, } from '@material-ui/core'
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import '../../../containers/Calendar/Calendar.scss';

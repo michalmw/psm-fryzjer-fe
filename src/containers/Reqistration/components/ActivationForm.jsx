@@ -1,59 +1,63 @@
 import * as React from 'react';
-import { Formik, Form, Field } from 'formik';
-import { Done, Close, KeyboardBackspace } from "@material-ui/icons";
-import { Button, IconButton, Drawer, InputAdornment } from '@material-ui/core';
-import { TextField } from 'formik-material-ui';
-import { useMutation } from "@apollo/react-hooks";
+import {Formik, Form, Field} from 'formik';
+import {Done, Close, KeyboardBackspace} from "@material-ui/icons";
+import {Button,InputAdornment, IconButton, Drawer} from '@material-ui/core';
+import {useMutation} from "@apollo/react-hooks";
 import labels from '../../../assets/labels';
-import { ADD_USER } from "../../Calendar/components/constants";
-import withStyles from "@material-ui/core/styles/withStyles";
+import {ADD_USER} from "../../Calendar/components/constants";
 import MaskedInput from 'react-text-mask';
 import "../Registration.scss"
 import {ValidationTextField} from "../../../components/Form/ValidationTextField";
 
-const RegistrationForm = ({open, handleOpen}) => {
+const ActivationForm = ({open, handleOpen}) => {
     const [addUser, {  loading, error, data }] = useMutation(ADD_USER, { onError(err) { console.log(err) }});
 
-    const TextMaskCustom = ({inputRef, ...other}) => (
-        <MaskedInput
-            {...other}
-            ref={(ref) => {
-                inputRef(ref ? ref.inputElement : null);
-            }}
-            mask={[/\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/, '-', /\d/, /\d/, /\d/]}
-            placeholderChar={'\u2000'}
-            showMask
-        />
-    );
+    function TextMaskCustom(props) {
+        const {inputRef, ...other} = props;
+
+        return (
+            <MaskedInput
+                {...other}
+                ref={(ref) => {
+                    inputRef(ref ? ref.inputElement : null);
+                }}
+                mask={[/\d/, /\d/, '-', /\d/, /\d/, '-', /\d/, /\d/]}
+                placeholderChar={'x'}
+                showMask
+            />
+        );
+    }
 
     const checkUser = (values, errors, touched) => {
-        if (!errors.phone && touched.phone && values.phone) {
+        if (!errors.activationCode && touched.activationCode && values.activationCode) {
             const {phone} = values;
-            const value = '+48' + formatPhone(phone);
+            const value = formatPhone(phone);
             // addUser({variables: {newUserInput: {phone: value}}})
         }
     }
 
-    const formatPhone = (phone) => phone.replace(/-/g, '').replace(/\s/g, '');
+    const formatPhone = (phone) => phone.replace(/-/g, '').replace(/x/g, '');
 
     return (
         <Drawer anchor="right" open={open}>
             <div className='drawer-middle'>
                 <div className="drawer-header">
-                    <IconButton onClick={() => handleOpen('registration', false)}><KeyboardBackspace /></IconButton>
+                    <IconButton onClick={() => handleOpen('activation', false)}><KeyboardBackspace /></IconButton>
                     <h1 className="registration__title">{labels.joinTitle}<strong>{labels.appTitle}</strong></h1>
                 </div>
                 <div className='drawer-content'>
-                    <p>{labels.phoneNumberCopy}</p>
+                    <p>{labels.provideCodeLabel}</p>
                     <Formik
-                        initialValues={{phone: '',}}
+                        initialValues={{
+                            activationCode: ''
+                        }}
                         validate={values => {
                             const errors = {}
-                            let {phone} = values;
-                            if (!values.phone) {
-                                errors.phone = labels.phoneRequiredError;
-                            } else if (formatPhone(phone).length !== 9) {
-                                errors.phone = labels.phoneFormatError;
+                            let {activationCode} = values;
+                            if (!values.activationCode) {
+                                errors.activationCode = labels.phoneRequiredError;
+                            } else if (formatPhone(activationCode).length !== 6) {
+                                errors.activationCode = labels.phoneFormatError;
                             }
                             return errors;
                         }}
@@ -61,15 +65,15 @@ const RegistrationForm = ({open, handleOpen}) => {
                             console.log(values)
                         }}
                         render={({submitForm, isSubmitting, values, setFieldValue, errors, touched}) => {
-                            const inputClass = touched.phone && (!errors.phone && " success-field" || errors.phone && " error-field") || '';
+                            const inputClass = touched.activationCode
+                                && (!errors.activationCode && " success-field" || errors.activationCode && " error-field") || '';
                             return (
                                 <Form className="form">
                                     <Field
                                         InputProps={{
-                                            startAdornment: <InputAdornment position="start">+48</InputAdornment>,
                                             endAdornment: <InputAdornment position="end">
-                                                {!errors.phone && touched.phone && <Done className="success-icon" />
-                                                || errors.phone && touched.phone && <Close className="error-icon" /> || ''}
+                                                {!errors.activationCode && touched.activationCode && <Done className="success-icon" />
+                                                || errors.activationCode && touched.activationCode && <Close className="error-icon" /> || ''}
                                             </InputAdornment>,
                                             inputComponent: TextMaskCustom,
                                         }}
@@ -78,25 +82,23 @@ const RegistrationForm = ({open, handleOpen}) => {
                                         color="secondary"
                                         autoFocus
                                         variant="outlined"
-                                        name="phone"
-                                        type="phone"
-                                        onKeyUp={() => {
-                                            if (values.phone) {
-                                                checkUser(values, errors, touched);
-                                                touched = true;
-                                            }
-                                        }}
+                                        name="activationCode"
+                                        type="activationCode"
+                                        onKeyUp={() => values.phone && checkUser(values, errors, touched)}
                                     />
                                     <div className="registration__button-container">
                                         <Button
-                                            disabled={!!errors.phone || !values.phone}
+                                            disabled={!!errors.activationCode || !values.activationCode}
                                             variant="contained"
                                             color="primary"
-                                            onClick={() => handleOpen('activation', true)}
+                                            onClick={() => handleOpen('profile', true)}
                                         >
-                                            {labels.getActivateCodeButton}
+                                            {labels.codeButtonLabel}
                                         </Button>
-                                        <Button className="font-button font-button--small">{labels.iGotSmsLabel}</Button>
+                                        <div className='activation-container'>
+                                            <p>{labels.haveNotGetCodeLabel} (60s)</p>
+                                            <Button className="font-button font-button--small">{labels.sentCodeAgainLabel}</Button>
+                                        </div>
                                     </div>
 
                                     <div className="registration__footer">
@@ -115,4 +117,4 @@ const RegistrationForm = ({open, handleOpen}) => {
     );
 }
 
-export default RegistrationForm;
+export default ActivationForm;

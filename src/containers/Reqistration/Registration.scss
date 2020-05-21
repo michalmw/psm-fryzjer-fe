@@ -7,13 +7,103 @@
   padding: 0;
 }
 .registration {
+  padding: 5vh 10vw 2vh;
+  &__title {
+    margin: 1.5rem 0;
+  }
+  &__copy {
+    margin: 3rem 0 1rem 0;
+    .svg-inline--fa {
+      color: $primary;
+      height: 0.4rem;
+    }
+    .MuiTypography-body1 {
+      line-height: 1rem;
+    }
+  }
+  &__button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    margin: 3rem 0;
+    .font-button {
+      margin: 1.5rem 2.2rem;
+    }
+  }
+  &__footer {
+    position: fixed;
+    display: flex;
+    bottom: 4vh;
+    padding: 0 1.5rem;
+    &__button {
+      display: flex;
+      .font-button {
+        line-height: 0.5rem;
+      }
+    }
+  }
   .MuiListItemIcon-root {
     min-width: 0;
     margin-right: 12px;
   }
 }
 
-.svg-inline--fa {
-  color: $primary;
-  height: 0.4rem;
+.drawer-header {
+  display: block;
+  .registration__title {
+    margin-left: 1rem;
+  }
+  .MuiSvgIcon-root {
+    color: $primary;
+    height: 1.8rem;
+    width: 1.8rem;
+  }
+}
+
+.activation-container {
+  text-align: right;
+  margin: 1rem 0;
+  p {
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+  }
+  .font-button {
+    margin: 0rem;
+    .MuiButton-label {
+      color: $font-dark;
+    }
+  }
+}
+
+.drawer-content .MuiTextField-root {
+  margin: 2rem 0 0 0  ;
+}
+
+.form {
+  .full-width {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 350px) {
+  .registration {
+    &__copy {
+      .MuiTypography-body1 {
+        font-size: 0.8rem;
+        line-height: 0.8rem;
+      }
+    }
+    &__button-container {
+      width: 100%;
+      display: flex;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      margin: 3rem 0;
+      .font-button {
+        margin: 1rem 2rem;
+      }
+    }
+  }
 }

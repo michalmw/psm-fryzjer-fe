@@ -1,68 +1,55 @@
 import * as React from 'react';
-import {render} from 'react-dom';
-import {Formik, Form, Field} from 'formik';
-import {
-    Button,
-    LinearProgress,
-    MenuItem,
-    FormControl,
-    InputLabel,
-    FormControlLabel,
-} from '@material-ui/core';
-import MuiTextField from '@material-ui/core/TextField';
-import {
-    fieldToTextField,
-    TextField,
-    TextFieldProps,
-    Select,
-    Switch,
-} from 'formik-material-ui';
-import {
-    TimePicker,
-    DatePicker,
-    DateTimePicker,
-} from 'formik-material-ui-pickers';
-import {MuiPickersUtilsProvider} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns'
-import {useMutation} from "@apollo/react-hooks";
+import { Formik, Form, Field } from 'formik';
+import { Button, IconButton, Drawer } from '@material-ui/core';
+import { TextField } from 'formik-material-ui';
+import { KeyboardBackspace } from "@material-ui/icons";
 
-const LoginForm = () => {
+const LoginForm = ({open, handleOpen}) => {
     return (
-        <Formik
-            initialValues={{
-                login: '',
-                password: ''
-            }}
-            onSubmit={(values) => {
-               console.log(values)
-            }}
-            render={({submitForm, isSubmitting, values, setFieldValue}) => (
-                <Form>
-                    <Field
-                        component={TextField}
-                        variant="outlined"
-                        name="login"
-                        type="login"
-                        label="login"
+        <Drawer anchor="right" open={open}>
+            <div className='drawer-middle'>
+                <div className="drawer-header">
+                    <IconButton onClick={() => handleOpen('login', false)}><KeyboardBackspace /></IconButton>
+                </div>
+                <div className='drawer-content'>
+                    <Formik
+                        initialValues={{
+                            login: '',
+                            password: ''
+                        }}
+                        onSubmit={(values) => {
+                           console.log(values)
+                        }}
+                        render={({submitForm, isSubmitting, values, setFieldValue}) => (
+                            <Form>
+                                <Field
+                                    component={TextField}
+                                    variant="outlined"
+                                    name="login"
+                                    type="login"
+                                    label="login"
+                                />
+                                <Field
+                                    component={TextField}
+                                    variant="outlined"
+                                    name="password"
+                                    type="password"
+                                    label="password"
+                                />
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    disabled={isSubmitting}
+                                    onClick={submitForm}
+                                >
+                                    Submit
+                                </Button>
+                            </Form>
+                        )}
                     />
-                    <Field
-                        component={TextField}
-                        variant="outlined"
-                        name="password"
-                        type="password"
-                        label="password"
-                    />
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        disabled={isSubmitting}
-                        onClick={submitForm}
-                    >
-                        Submit
-                    </Button>
-                </Form>
-            )}
-        />
+                </div>
+            </div>
+        </Drawer>
     );
 }
 

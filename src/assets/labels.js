@@ -1,5 +1,5 @@
 module.exports = {
-    appTitle: 'HairApp',
+    appTitle: 'Twojego salonu',
     calendarTitle: 'Calendar',
     dashboardTitle: 'Dashboard',
     reportTitle: 'Report',
