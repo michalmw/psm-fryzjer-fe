@@ -1,5 +1,10 @@
 import React from 'react';
+<<<<<<< HEAD
 import {Button, Drawer, List, ListItem, ListItemIcon, ListItemText, IconButton} from "@material-ui/core";
+=======
+import { Link } from 'react-router-dom';
+import {Button, Drawer, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core";
+>>>>>>> 4cce0e4906c5703f44bf7333f530a6a9f20bcc11
 import LoginForm from "./components/LoginForm";
 import RegistrationForm from "./components/RegistrationForm";
 import './Registration.scss'
@@ -21,6 +26,7 @@ const Registration  = () => {
     const handleOpen = (sectionName, isOpen = true) => setOpen({ ...open, [sectionName]: isOpen });
 
     return (
+<<<<<<< HEAD
         <div className="registration">
             <h1 className="registration__title">{labels.joinTitle}<strong>{labels.appTitle}</strong></h1>
 
@@ -44,6 +50,26 @@ const Registration  = () => {
                 </List>
             </div>
 
+=======
+        <div className='registration'>
+            <Link to="/calendar"><h1>{labels.joinTitle}<strong>{labels.appTitle}</strong></h1></Link>
+            <p>{labels.startTitle}</p>
+            <p>{labels.startCopy}</p>
+            <List>
+                <ListItem>
+                    <ListItemIcon>
+                        <FontAwesomeIcon icon={faCircle} />
+                    </ListItemIcon>
+                    <ListItemText primary={labels.yourAccount} />
+                </ListItem>
+                <ListItem>
+                    <ListItemIcon>
+                        <FontAwesomeIcon icon={faCircle} />
+                    </ListItemIcon>
+                    <ListItemText primary={labels.yourCompanyAccount} />
+                </ListItem>
+            </List>
+>>>>>>> 4cce0e4906c5703f44bf7333f530a6a9f20bcc11
             <p className="primary-info">{labels.accountCreationTime}</p>
 
             <div className="registration__button-container">
@@ -69,4 +95,3 @@ const Registration  = () => {
 }
 
 export default Registration;
-

@@ -30,7 +30,7 @@ export default function LabelBottomNavigation() {
             <BottomNavigationAction value="report" icon={<Link to="/report"><FontAwesomeIcon icon={faChartBar} /></Link>} />
             <BottomNavigationAction value="account" icon={<Avatar className={classes.small} />} />
             <BottomNavigationAction value="add" icon={<FontAwesomeIcon icon={faPlusSquare} />} />
-            <BottomNavigationAction value="settings" icon={<FontAwesomeIcon icon={faCog} />}/>
+            <BottomNavigationAction value="settings" icon={<Link to="/clients"><FontAwesomeIcon icon={faCog} /></Link>}/>
         </BottomNavigation>
     );
 }
