@@ -1,15 +1,15 @@
-import clients from './data/clients';
-import companies from './data/companies';
-import employees from './data/employees';
-import products from './data/products';
-import services from './data/services';
-import users from './data/users';
-import visits from './data/visits';
+const categories = require('./data/categories');
+const clients = require('./data/clients');
+const companies = require('./data/companies');
+const products = require('./data/products');
+const services = require('./data/services');
+const users = require('./data/users');
+const visits = require('./data/visits');
 
 module.exports = {
+    categories,
     clients,
     companies,
-    employees,
     products,
     services,
     users,

@@ -1,5 +1,8 @@
 @import "../../assets/styles/styles";
 
+$icon: 24px;
+
+
 .MuiDrawer-paper{
   width: 100%;
 }
@@ -7,7 +10,7 @@
   padding: 0;
 }
 .registration {
-  padding: 5vh 10vw 2vh;
+  padding: 5vh 10vw 2vh 10vw;
   &__title {
     margin: 1.5rem 0;
   }
@@ -28,13 +31,16 @@
     flex-wrap: wrap;
     margin: 3rem 0;
     .font-button {
-      margin: 1.5rem 2.2rem;
+      margin: 1rem 3.2rem;
     }
   }
   &__footer {
     position: fixed;
+    justify-content: center;
+    width: 100%;
     display: flex;
     bottom: 4vh;
+    left: 0;
     padding: 0 1.5rem;
     &__button {
       display: flex;
@@ -61,6 +67,20 @@
   }
 }
 
+.drawer-subheader {
+  display: flex;
+  h5 {
+    margin-left: -$icon;
+    text-align: center;
+    width: 100%;
+  }
+  .MuiSvgIcon-root {
+    color: $primary;
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}
+
 .activation-container {
   text-align: right;
   margin: 1rem 0;
@@ -76,8 +96,78 @@
   }
 }
 
-.drawer-content .MuiTextField-root {
-  margin: 2rem 0 0 0  ;
+.drawer {
+  &__button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2rem;
+  }
+}
+
+.congratulations {
+  &__header {
+    text-align: center;
+    h5 {
+      font-size: 1rem;
+      font-weight: bolder;
+    }
+  }
+  &__content {
+    background-image: url(/bg1.svg);
+    background-size: cover;
+    background-position-x: -3rem;
+    height: 70vh;
+  }
+}
+
+.invitations {
+  &__content {
+    display: flex;
+    height: 70vh;
+    button {
+      margin: auto;
+    }
+  }
+}
+
+.error-button {
+  display: flex;
+  p {
+    color: $error;
+    font-size: 0.8rem;
+    line-height: 2.2rem;
+  }
+  button {
+    font-size: 0.8rem;
+  }
+}
+
+.details-title {
+  width: 100%;
+  margin: -2rem 0 1rem 0;
+}
+
+.drawer-content {
+  &__title {
+    margin: -1rem 0 5rem 0;
+    width: 100%;
+  }
+  p {
+    width: 100%;
+  }
+  .MuiTextField-root {
+    margin: 1rem 0 0 0  ;
+  }
+}
+
+.drawer-content-details {
+  padding: 0 2rem;
+  .section {
+    margin-top: 1rem;
+  }
+  .MuiTextField-root {
+    margin: 0.8rem 0 0 0;
+  }
 }
 
 .form {
@@ -85,7 +175,103 @@
     width: 100%;
     max-width: 100%;
   }
+  .MuiTextField-root {
+    width: 100%;
+  }
 }
+
+.company-details {
+  margin-top: 2rem;
+  .MuiGrid-root .MuiGrid-item  {
+    padding: 0.4rem 0.2rem;
+  }
+  .MuiTextField-root {
+    margin: 0;
+  }
+  .drawer-content {
+    &__title {
+      margin-bottom: 0;
+    }
+  }
+  .registration__button-container {
+    margin: 2rem 0;
+  }
+  .MuiInput-underline:before, .MuiInput-underline:after {
+    border: 0;
+  }
+  
+  .MuiInputBase-input {
+    padding: 1rem;
+  }
+}
+
+.hour-group {
+  margin-top: 0.5rem;
+}
+
+.quick-add {
+  .drawer-content {
+    &__title {
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.button-group {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  p {
+    width: 100%;
+    text-align: left;
+    margin: 1rem 0;
+  }
+}
+
+.nr-break {
+  font-weight: 100;
+  font-size: 2.5rem;
+  line-height: 2.6rem;
+  color: $font-grey-light;
+}
+
+
+.form .activation-container {
+  p {
+    margin: 0 2rem 0 0;
+  }
+  .font-button {
+    margin-right: -0.5rem;
+  }
+}
+
+.congratulations {
+  &__icon {
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__title {
+    color: white;
+    text-align: center;
+    font-weight: bolder;
+    margin-top: 2rem;
+  }
+  &__footer {
+    padding: 3rem;
+    h2 {
+      display: flex;
+      font-size: 1.5rem;
+      .MuiSvgIcon-root {
+        color: $primary;
+        margin-top: -0.5rem;
+        height: 1.8rem;
+        width: 1.8rem;
+      }
+    }
+  }
+}
+
 
 @media (max-width: 350px) {
   .registration {
@@ -102,7 +288,27 @@
       flex-wrap: wrap;
       margin: 3rem 0;
       .font-button {
-        margin: 1rem 2rem;
+        margin: 0.8rem 1.4rem;
+      }
+    }
+  }
+
+  .profile-form {
+    .registration {
+      &__title {
+        margin: 0.5rem 1rem;
+      }
+    }
+    .drawer__button-container {
+        margin-top: 1rem;
+    }
+  }
+
+  .congratulations {
+    &__footer {
+      padding: 2rem;
+      h2 {
+        font-size: 1.4rem;
       }
     }
   }

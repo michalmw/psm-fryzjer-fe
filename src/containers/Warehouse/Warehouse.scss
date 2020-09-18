@@ -1,0 +1,82 @@
+@import "../../assets/styles/styles";
+
+.product-content .MuiTextField-root {
+    margin: 0;
+}
+
+h2 {
+    text-align: left;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+h3 {
+    font-weight: 500;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.form {
+    p {
+        line-height: 1rem;
+        padding: 1rem 0;
+        margin: 0 0.5rem
+    }
+    .button-container .MuiButton-containedPrimary {
+        margin-top: 3rem;
+    }
+}
+
+.MuiAutocomplete-input:first-child{
+    padding: 12px 20px !important;
+}
+.product-element {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    svg {
+        color: $font-dark
+    }
+    .MuiIconButton-root {
+        padding: 5px;
+    }
+    p {
+        font-style: italic;
+        font-weight: 200;
+        text-align: left;
+        line-height: 1.2rem;
+        strong {
+            font-style: normal;
+        }
+    }
+    .inline-action {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        p {
+            text-align: right;
+            padding: 0 5px;
+        }
+    }
+}
+
+.small-field {
+    .MuiOutlinedInput-colorSecondary {
+        padding: 2px;
+    }
+    .MuiOutlinedInput-colorSecondary.Mui-focused {
+        padding: 0;
+    }
+}
+
+.list-subtitle {
+    .MuiTextField-root {
+        width: 75%;
+    }
+    button {
+        width: 25%;
+    }
+    h2 {
+        padding-left: 0.5rem;
+    }
+}

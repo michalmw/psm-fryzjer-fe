@@ -1,11 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { BottomNavigation, BottomNavigationAction, Avatar } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarAlt, faPlusSquare, faChartBar } from '@fortawesome/free-regular-svg-icons'
-import { faCog, faBoxOpen } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarAlt, faPlusSquare } from '@fortawesome/free-regular-svg-icons'
+import { faCog, faUsers } from '@fortawesome/free-solid-svg-icons'
+
+import { url } from '../../../constants';
+import QuickAdd from '../../QuikAdd';
+import Settings from '../../Settings';
+import CustomAvatar from '../../Form/CustomAvatar';
+import { getMe } from '../../../actions/UserActions';
 import './Navbar.scss';
 
 const useStyles = makeStyles((theme) => ({
@@ -16,21 +23,44 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export default function LabelBottomNavigation() {
+export const LabelBottomNavigation = ({me, getMyAccount}) => {
     const classes = useStyles();
     const [value, setValue] = React.useState('calendar');
+    const [quickAddOpen, handleOpen] = React.useState(false);
+    const [settingsOpen, openSettings] = React.useState(false);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
+    React.useEffect(() => {
+        if (!me?.company) {
+          getMyAccount();
+        }
+      }, []);
+
     return (
-        <BottomNavigation value={value} onChange={ handleChange } className="bottom-nav">
-            <BottomNavigationAction value="calendar" icon={<Link to="/calendar"><FontAwesomeIcon icon={faCalendarAlt} /></Link>} />
-            <BottomNavigationAction value="report" icon={<Link to="/report"><FontAwesomeIcon icon={faChartBar} /></Link>} />
-            <BottomNavigationAction value="account" icon={<Avatar className={classes.small} />} />
-            <BottomNavigationAction value="add" icon={<FontAwesomeIcon icon={faPlusSquare} />} />
-            <BottomNavigationAction value="settings" icon={<Link to="/clients"><FontAwesomeIcon icon={faCog} /></Link>}/>
-        </BottomNavigation>
+        <>
+            <BottomNavigation value={value} onChange={ handleChange } className="bottom-nav">
+                <BottomNavigationAction value="calendar" icon={ <Link to={ url.calendar }><FontAwesomeIcon icon={ faCalendarAlt } /></Link> } />
+                <BottomNavigationAction value="clients" icon={ <Link to={ url.clients }><FontAwesomeIcon icon={ faUsers } /></Link> } />
+                <BottomNavigationAction value="account" icon={ <Link to={ `${url.users}/me` }><CustomAvatar className={classes.small} avatar={me?.avatar} name={me?.name} surname={me?.surname} /></Link> } />
+                <BottomNavigationAction value="add" onClick={ () => handleOpen(true) } icon={ <FontAwesomeIcon icon={ faPlusSquare } /> } />
+                <BottomNavigationAction value="settings" onClick={ () => openSettings(true) } icon={ <FontAwesomeIcon icon={ faCog } /> }/>
+            </BottomNavigation>
+            <QuickAdd open={quickAddOpen} onClose={() => handleOpen(false)} />
+            <Settings open={settingsOpen} handleClose={() => openSettings(false)} />
+        </>
     );
 }
+
+const mapStateToProps = (state) => ({
+    me: state.users?.me
+  });
+  
+  const mapDispatchToProps = (dispatch) => ({
+    getMyAccount: () => dispatch(getMe())
+  });
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(LabelBottomNavigation);
+  

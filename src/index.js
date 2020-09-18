@@ -15,46 +15,35 @@ import { theme } from './assets/theme';
 import App from './App'
 import rootReducer from './reducers'
 import './assets/styles/styles.scss';
-import ApolloClient from "apollo-boost";
-import {api} from "./enviroments/config";
+import ApolloClient from "apollo-client";
+import { localApi } from "./enviroments/config";
+import { setContext } from 'apollo-link-context'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { createHttpLink } from "apollo-link-http";
+
+const link = createHttpLink({ uri: localApi });
 
 const store = createStore(rootReducer, applyMiddleware(thunk));
-const client = new ApolloClient({
-    uri: api,
-    onError: (({ graphQLErrors, networkError, operation, forward }) => {
-        if (graphQLErrors) {
-            for (let err of graphQLErrors) {
-                switch (err.extensions.code) {
-                    case 'UNAUTHENTICATED':
-                        // error code is set to UNAUTHENTICATED
-                        // when AuthenticationError thrown in resolver
+const authLink = setContext((_, { headers }) => {
+    const token = localStorage.getItem('token');
+    return {
+      headers: {
+        ...headers,
+        authorization: token ? `Bearer ${token}` : ''
+      }
+    }
+  })
 
-                        // modify the operation context with a new token
-                        const oldHeaders = operation.getContext().headers;
-                        operation.setContext({
-                            headers: {
-                                ...oldHeaders,
-                            },
-                        });
-                        // retry the request, returning the new observable
-                        return forward(operation);
-                }
-            }
-        }
-        if (networkError) {
-            console.log(`[Network error]: ${networkError}`);
-            // if you would also like to retry automatically on
-            // network errors, we recommend that you use
-            // apollo-link-retry
-        }
-    })
-});
+  const client = new ApolloClient({
+    link: authLink.concat(link),
+    cache: new InMemoryCache()
+  })
 
 render(
-  <ApolloProvider client={client}>
+  <ApolloProvider client={ client }>
       <Provider store={ store }>
           <MuiThemeProvider theme={ theme }>
-              <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <MuiPickersUtilsProvider utils={ DateFnsUtils }>
                   <CssBaseline />
                   <App />
               </MuiPickersUtilsProvider>

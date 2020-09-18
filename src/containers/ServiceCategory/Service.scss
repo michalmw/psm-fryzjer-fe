@@ -1,0 +1,54 @@
+@import "../../assets/styles/styles";
+
+.service-content .MuiTextField-root {
+    margin: 0;
+}
+
+.user-card {
+    h2 {
+        text-align: left;
+        width: 50%;
+        margin-bottom: 1rem;
+    }
+}
+
+.inline-form {
+    display: flex;
+    justify-content: space-between;
+    .MuiTextField-root {
+        width: 60%;
+    }
+}
+
+.category-content .form {
+    width: 100%;
+    p {
+        line-height: 1rem;
+        padding: 1rem 0;
+        margin: 0;
+    }
+    .MuiTextField-root {
+        width: 100%;
+    }
+    .button-container .MuiButton-containedPrimary {
+        margin-top: 3rem;
+    }
+}
+
+.category-element {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    svg {
+        color: $font-dark
+    }
+}
+
+.list-subtitle {
+    h2 {
+        width: 60%
+    }
+    .font-button {
+        width:40%
+    }
+}

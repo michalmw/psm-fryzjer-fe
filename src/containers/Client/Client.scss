@@ -1,0 +1,158 @@
+@import "../../assets/styles/styles";
+
+.client-content {
+  .date-picker {
+    .MuiInputBase-input {
+      padding: 1.2rem 1rem;
+    }
+  }
+  .MuiFormControl-fullWidth {
+    margin: 0.2rem 0;
+  }
+  h3 {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    margin-top: 1rem;
+  }
+  .upload-button {
+      .MuiIconButton-root {
+        border: dashed 1px $font-grey;
+        margin: 1rem;
+        width: 50px;
+        height: 50px;
+    }
+  }
+
+  .MuiGrid-root .MuiGrid-item  {
+    padding: 0.4rem 0.2rem;
+  }
+  .MuiTextField-root {
+    margin: 0;
+  }
+  .drawer-content {
+    &__title {
+      margin-bottom: 0;
+    }
+  }
+  .registration__button-container {
+    margin: 2rem 0;
+  }
+  .MuiInput-underline:before, .MuiInput-underline:after {
+    border: 0;
+  }
+  
+  .MuiInputBase-input {
+    padding: 1rem;
+  }
+}
+
+.special-buttons {
+    margin: 0.2rem 0.5rem;
+    .MuiIconButton-root {
+      margin: 0.2rem;
+      background-color: $secondary;
+      color: white;
+      svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    .MuiIconButton-root:hover  {
+      background-color: $primary;
+    }
+}
+.client {
+  .user-card {
+    display: flex;
+    justify-content: space-between;
+    p {
+      text-align: left;
+      line-height: 1.2rem;
+      font-style: italic;
+      white-space: nowrap;
+      width: 100%;
+      max-width: 10rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      strong {
+        font-style: normal;
+      }
+    }
+  }
+}
+
+.client-info {
+  min-width: 9rem;
+  max-width: 9rem;
+}
+
+.details {
+  padding: 1rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  p {
+    font-size: 0.9rem;
+    text-align: right;
+  }
+}
+
+.client-subheader {
+  background: linear-gradient(61.99deg, #FF2366 0%, #6A00FF 99.12%);
+  &__content {
+    padding: 1.5rem 1.5rem 1rem 1rem;
+    display: flex;
+    svg, h2, p, a {
+      color: white;
+    }
+    h2 {
+      font-size: 1rem;
+      margin: 0;
+    }
+    p {
+      font-size: 0.9rem;
+      line-height: 1.2rem;
+    }
+    .MuiAvatar-root {
+      margin: auto 1rem auto 0;
+      width: 4rem;
+      height: 4rem;
+    }
+    .client-info {
+      p {
+        font-weight: 400;
+      }
+    }
+  }
+  
+  .action {
+    padding: 0 1rem;
+    display: flex;
+    justify-content: flex-end;
+    .MuiButton-text{
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .special-buttons {
+      margin: 0.1rem 0.2rem;
+      .MuiIconButton-root {
+        margin: 0.1rem;
+        background-color: $secondary;
+        color: white;
+        svg {
+          width: 12px;
+          height: 12px;
+        }
+      }
+  }
+  .client-info {
+    min-width: 8rem;
+    max-width: 8rem;
+    padding: 0 0.1rem;
+  }
+}

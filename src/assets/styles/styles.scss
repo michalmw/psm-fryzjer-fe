@@ -1,6 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 $background-grey: #f3f3f3;
 $background-grey-light: #F2F2F2;
+$background-grey-lighter: #F9F9F9;
 $font-grey-light: rgba(0, 0, 0, 0.38);
 $font-grey: rgba(0, 0, 0, 0.25);
 $font-dark: #363165;
@@ -12,8 +13,13 @@ $error: #FF0F0F;
 
 html, body {
   width: 100%;
+  height: 100%;
   margin: 0;
+  padding: 0;
   font-family: Montserrat;
+  background-image: url('../circles.svg');
+  background-size: cover;
+  background-color: $background-grey-lighter;
 }
 
 p, li, h1, h2, h3, h4, h5, h6 {
@@ -21,15 +27,27 @@ p, li, h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-weight: bold;
-  font-size: 1rem;
+  font-weight: 500;
+  font-size: 1.6rem;
   line-height: 1.5rem;
 
   strong {
     font-weight: 900;
-    font-size: 1.4rem;
+    font-size: 1.8rem;
     line-height: 2rem;
   }
+}
+
+.loader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  margin-top: 20rem;
+  justify-content: center;
+}
+
+h2 {
+  font-size: 1.4rem;
 }
 
 p, li {
@@ -53,8 +71,26 @@ a {
 }
 
 body {
+  .new-section {
+    border-top: dashed 1px $background-grey;
+    margin-top: 0.3rem;
+    padding-top: 0.2rem;
+  }
+
+
   input {
     border: 0;
+  }
+
+  .MuiButton-containedSecondary {
+    background-color: white;
+    border: 2px solid $secondary;
+    color: $secondary;
+    border-radius: 30px;
+    &:hover {
+      color: white;
+      background-color: $secondary;
+    }
   }
 
   .primary-info {
@@ -64,6 +100,12 @@ body {
   .MuiButton-contained.Mui-disabled {
     background-color: $primary-disabled;
     color: white;
+  }
+  
+  .MuiButton-containedSecondary.Mui-disabled {
+    background-color: white;
+    color: $secondary;
+    opacity: 0.5;
   }
 
   .success-icon {
@@ -83,15 +125,53 @@ body {
       border-radius: 5px;
     }
   }
+  .MuiOutlinedInput-colorSecondary {
+    padding: 2px calc(1rem + 2px);
+  }
+
+  .MuiOutlinedInput-colorSecondary.Mui-focused {
+    border: 2px solid $secondary !important;
+    border-radius: 5px;
+    padding: 0 1rem;
+
+    .MuiOutlinedInput-notchedOutline {
+      border: 0 solid $success !important;
+      border-radius: 5px;
+    }
+    .MuiInputAdornment-positionEnd {
+      display: none;
+    }
+    .MuiOutlinedInput-input {
+      color: $secondary;
+    }
+  }
 
   .error-field {
     .MuiOutlinedInput-input {
       color: $error;
     }
-    .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline {
+    .MuiOutlinedInput-root {
       border: 2px solid $error;
       border-radius: 5px;
     }
+  }
+
+  .active-field {
+    .MuiOutlinedInput-input {
+      color: $secondary;
+    }
+    .MuiOutlinedInput-root.Mui-error .MuiOutlinedInput-notchedOutline {
+      border: 2px solid $secondary;
+      border-radius: 5px;
+    }
+  }
+
+  .start-adornment {
+    margin-right: 0.5rem;
+  }
+
+  .MuiInputBase-input {
+    height: 0.5rem;
   }
 
   .MuiListItem-root {
@@ -99,9 +179,17 @@ body {
     padding-bottom: 0;
   }
 
+  .MuiInputBase-root {
+    background-color: #F2F2F2;
+    border-radius: 5px;
+  }
+  .MuiOutlinedInput-notchedOutline {
+    border: 0;
+  }
+
   .MuiButton-containedPrimary {
     border-radius: 30px;
-    padding: 0.5rem 1.2rem;
+    padding: 0.3rem 2rem;
     text-transform: none;
     font-weight: bold;
     font-size: 1rem;
@@ -125,7 +213,9 @@ body {
   }
 }
 
-
+.file-upload {
+  display: none;
+}
 
 @media (max-width: 350px) {
   h1 {

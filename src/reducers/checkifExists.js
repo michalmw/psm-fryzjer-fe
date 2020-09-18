@@ -1,4 +1,8 @@
-import { GET_EVENTS, GET_EVENTS_SUCCESS, GET_EVENTS_ERROR } from '../actions/actionTypes';
+import { 
+    CHECK_IF_EXIST, 
+    CHECK_IF_EXIST_SUCCESS, 
+    CHECK_IF_EXIST_ERROR
+} from '../actions/actionTypes';
 import { statusType } from '../constants';
 
 const initialState = {
@@ -6,23 +10,23 @@ const initialState = {
     status: null
 };
 
-const heroes = (state = initialState, action) => {
+const checkIfExist = (state = initialState, action) => {
     switch (action.type) {
-        case GET_EVENTS: {
+        case CHECK_IF_EXIST: {
             return {
                 ...state,
                 data: [],
                 status: statusType.loading
             };
         }
-        case GET_EVENTS_SUCCESS: {
+        case CHECK_IF_EXIST_SUCCESS: {
             return {
                 ...state,
                 data: action.payload,
                 status: statusType.success
             };
         }
-        case GET_EVENTS_ERROR: {
+        case CHECK_IF_EXIST_ERROR: {
             return {
                 ...state,
                 data: [],
@@ -34,4 +38,4 @@ const heroes = (state = initialState, action) => {
     }
 };
 
-export default heroes;
+export default checkIfExist;

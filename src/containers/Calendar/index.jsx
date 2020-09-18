@@ -3,14 +3,13 @@ import moment from "moment";
 import events from './events'
 import { Calendar, Views, momentLocalizer } from 'react-big-calendar'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
-import { Drawer, IconButton, Button, Paper } from '@material-ui/core'
+import { Drawer} from '@material-ui/core'
 import Toolbar from './components/DatePickerToolbar';
 
 import 'react-big-calendar/lib/css/react-big-calendar.css'
 import '../../containers/Calendar/Calendar.scss';
 import CalendarToolbar from "./components/CalendarToolbar";
 import AddVisit from "./components/AddVisit";
-import {BrowserRouter as Router, Switch} from "react-router-dom";
 import Navbar from "../../components/layout/Navbar";
 
 
@@ -101,7 +100,7 @@ class Dnd extends React.Component {
 
     render() {
         const localizer = momentLocalizer(moment);
-        const {date, events, open} = this.state;
+        const {events, open} = this.state;
         return (
             <div>
                 <Drawer anchor="bottom" open={open}>

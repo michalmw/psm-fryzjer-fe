@@ -1,29 +1,11 @@
 import * as React from 'react';
-import {render} from 'react-dom';
 import {Formik, Form, Field} from 'formik';
 import {
-    Button,
-    LinearProgress,
-    MenuItem,
-    FormControl,
-    InputLabel,
-    FormControlLabel,
+    Button
 } from '@material-ui/core';
-import MuiTextField from '@material-ui/core/TextField';
 import {
-    fieldToTextField,
-    TextField,
-    TextFieldProps,
-    Select,
-    Switch,
+    TextField
 } from 'formik-material-ui';
-import {
-    TimePicker,
-    DatePicker,
-    DateTimePicker,
-} from 'formik-material-ui-pickers';
-import {MuiPickersUtilsProvider} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
 import {ADD_USER} from "./constants";
 import {useMutation} from "@apollo/react-hooks";
 

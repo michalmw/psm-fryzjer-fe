@@ -1,0 +1,89 @@
+@import "../../assets/styles/styles";
+
+.visit-menu {
+  display: flex;
+  .MuiPaper-elevation1 {
+    padding: 1rem 0.6rem;
+    text-align: center;
+    background: transparent;
+    border-radius: 0;
+    border-top: solid 1px $background-grey-light!important;
+    border-bottom: solid 1px $background-grey-light !important;
+    h3 {
+      font-size: 1rem;
+    }
+    p {
+      font-size: 0.8rem;
+    }
+  }
+  .active {
+    background-color: $background-grey-light;
+  }
+  .error {
+    p, h3 {
+      color: $error
+    }
+  }
+}
+
+.canceled {
+  text-decoration: line-through;
+}
+
+.visit {
+  .user-card {
+  flex-wrap: wrap;
+  p {
+    margin-left: 0;
+  }
+  li {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+  }
+  .MuiAvatar-root {
+    margin: auto 1rem auto 0;
+    width: 4rem;
+    height: 4rem;
+  }
+  .card-header {
+    width: 100%;
+    padding: 0.2rem;
+
+    display: flex;
+    justify-content: space-between;
+    p {
+      font-style: italic;
+      text-align: left;
+      strong {
+        font-style: normal;
+      }
+    }
+    .price {
+      width: 30%;;
+      text-align: right;
+    }
+  }
+  .client-info {
+    width: 70%;
+    p {
+      padding-left: 1.5rem;
+      text-align: left;
+      line-height: 1.2rem;
+    }
+  }
+}
+}
+
+@media (max-width: 350px) {
+  .visit-menu {
+    .MuiPaper-elevation1 {
+      padding: 0.5rem 0.4rem;
+      h3 {
+        font-size: 0.9rem;
+      }
+      p {
+        font-size: 0.7rem;
+      }
+    }
+  }
+}

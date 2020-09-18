@@ -1,0 +1,26 @@
+@import "../../assets/styles/styles";
+
+.thumb {
+    display: flex;
+    justify-content: space-between;
+    p {
+      padding: 2rem 0 !important;
+      width: 40%;
+      max-width: 8rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    a  {
+      padding: 1rem 0;
+    }
+  }
+
+  .img-thumbnail {
+    object-fit: cover;
+    margin: 1rem;
+    border-radius: 50%;
+    border: solid 1px $font-grey;
+    width: 50px;
+    height: 50px;
+}
